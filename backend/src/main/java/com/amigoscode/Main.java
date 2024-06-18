@@ -31,12 +31,12 @@ public class Main {
 //            createRandomCustomer(customerRepository, passwordEncoder);
             s3Service.putObject(
                     "fs-mzkcode-customer-test",
-                    "foo",
+                    "foo/bar/jamila",
                     "Hello world".getBytes());
 
            byte[] obj = s3Service.getObject(
                    "fs-mzkcode-customer-test",
-                   "foo");
+                   "foo/bar/jamila");
 
             System.out.println("hooray: " + new String(obj));
         };
