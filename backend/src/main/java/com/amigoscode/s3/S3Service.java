@@ -15,8 +15,8 @@ public class S3Service {
 
     private final S3Client s3;
 
-    public S3Service(S3Client s3Client) {
-        this.s3 = s3Client;
+    public S3Service(S3Client s3) {
+        this.s3 = s3;
     }
 
     public void putObject(String bucketName, String key, byte[] file){
@@ -28,9 +28,9 @@ public class S3Service {
         s3.putObject(objectRequest, RequestBody.fromBytes(file));
     }
 
-    public byte[] getObject(String bucketname, String key){
+    public byte[] getObject(String bucketName, String key){
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                .bucket(bucketname)
+                .bucket(bucketName)
                 .key(key)
                 .build();
 
