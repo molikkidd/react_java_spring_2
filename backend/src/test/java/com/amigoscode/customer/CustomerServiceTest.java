@@ -3,6 +3,8 @@ package com.amigoscode.customer;
 import com.amigoscode.exception.DuplicateResourceException;
 import com.amigoscode.exception.RequestValidationException;
 import com.amigoscode.exception.ResourceNotFoundException;
+import com.amigoscode.s3.S3Buckets;
+import com.amigoscode.s3.S3Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,10 +28,12 @@ class CustomerServiceTest {
     private PasswordEncoder passwordEncoder;
     private CustomerService underTest;
     private final CustomerDTOMapper customerDTOMapper = new CustomerDTOMapper();
+    private S3Service s3Service;
+    private S3Buckets s3Buckets;
 
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao, customerDTOMapper, passwordEncoder);
+        underTest = new CustomerService(customerDao, customerDTOMapper, passwordEncoder, s3Service, s3Buckets);
     }
 
     @Test

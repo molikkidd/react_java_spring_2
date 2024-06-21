@@ -11,6 +11,9 @@ cors:
 
 aws:
   region: us-east-1
+  s3:
+    buckets:
+      customer: fs-mzkcode-customer-test
 
 management:
   endpoints:
