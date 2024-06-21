@@ -82,5 +82,9 @@ public class CustomerListDataAccessService implements CustomerDao {
                 .filter(c -> c.getUsername().equals(email))
                 .findFirst();
     }
-
+    @Override
+    public void updateCustomerProfileImageId(String profileImageId, Integer customerId) {
+//        customerRepository.updateProfileImageId(profileImageId, customerId);
+//        Needs Implementation
+    }
 }
