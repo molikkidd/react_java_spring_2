@@ -131,7 +131,8 @@ public class CustomerService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //TODO: Store profileImageId to postgres
+        //TODO: Store profileImageId to db
+        customerDao.updateCustomerProfileImageId(profileImageId,customerId);
 
     }
 
@@ -143,11 +144,14 @@ public class CustomerService {
                 ));
 
         //TODO: Check if profileImageId is empty or null
-        var profileImageId = "TODO";
-
+if(customer.profileImageId().isBlank()) {
+    throw new ResourceNotFoundException(
+            "customer with id [%s] profile image not found".formatted(customerId)
+    );
+}
         byte[] picture = s3Service.getObject(
                 buckets.getCustomer(),
-                "profile-images/%s/%s".formatted(customerId, profileImageId)
+                "profile-images/%s/%s".formatted(customerId, customer.profileImageId())
         );
         return picture;
     }
