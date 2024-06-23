@@ -144,15 +144,17 @@ public class CustomerService {
                 ));
 
         //TODO: Check if profileImageId is empty or null
-if(customer.profileImageId().isBlank()) {
-    throw new ResourceNotFoundException(
-            "customer with id [%s] profile image not found".formatted(customerId)
-    );
-}
+        if(customer.profileImageId().isBlank()) {
+            throw new ResourceNotFoundException(
+                    "customer with id [%s] profile image not found".formatted(customerId)
+            );
+        }
+
         byte[] picture = s3Service.getObject(
                 buckets.getCustomer(),
                 "profile-images/%s/%s".formatted(customerId, customer.profileImageId())
         );
+
         return picture;
     }
 }
