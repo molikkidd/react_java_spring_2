@@ -29,22 +29,24 @@ public class Main {
             PasswordEncoder passwordEncoder) {
         return args -> {
             createRandomCustomer(customerRepository, passwordEncoder);
-//            testBucketUploadAndDownload(s3Service, s3Buckets);
+            // testBucketUploadAndDownload(s3Service, s3Buckets);
         };
     }
-//import s3services and s3buckets inside the commander runner to run testbuckets....
 
-    private static void testBucketUploadAndDownload(S3Service s3Service, S3Buckets s3Buckets) {
+    private static void testBucketUploadAndDownload(S3Service s3Service,
+                                                    S3Buckets s3Buckets) {
         s3Service.putObject(
                 s3Buckets.getCustomer(),
                 "foo/bar/jamila",
-                "Hello world".getBytes());
+                "Hello World".getBytes()
+        );
 
         byte[] obj = s3Service.getObject(
-                "fs-mzkcode-customer-test",
-                "foo/bar/jamila");
+                s3Buckets.getCustomer(),
+                "foo/bar/jamila"
+        );
 
-        System.out.println("hooray: " + new String(obj));
+        System.out.println("Hooray: " + new String(obj));
     }
 
     private static void createRandomCustomer(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {

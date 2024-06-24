@@ -10,10 +10,11 @@ cors:
   exposed-headers: "*"
 
 aws:
-  region: us-east-1
+  region: eu-west-1
   s3:
+    mock: true
     buckets:
-      customer: fs-mzkcode-customer-test
+      customer: fs-amigoscode-customer-test
 
 management:
   endpoints:
@@ -36,3 +37,9 @@ spring:
     show-sql: true
   main:
     web-application-type: servlet
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  codec:
+    max-in-memory-size: 10MB

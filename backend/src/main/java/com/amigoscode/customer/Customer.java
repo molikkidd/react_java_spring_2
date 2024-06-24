@@ -60,21 +60,13 @@ public class Customer implements UserDetails {
             nullable = false
     )
     private String password;
-    @Column(unique = true)
+
+    @Column(
+            unique = true
+    )
     private String profileImageId;
 
     public Customer() {
-    }
-
-    public Customer(Integer id,
-                    String name,
-                    String email,
-                    String password,
-                    Integer age,
-                    Gender gender,
-    String profileImageId) {
-        this(id,name,email,password, age,gender);
-        this.profileImageId = profileImageId;
     }
 
     public Customer(Integer id,
@@ -89,6 +81,17 @@ public class Customer implements UserDetails {
         this.password = password;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Customer(Integer id,
+                    String name,
+                    String email,
+                    String password,
+                    Integer age,
+                    Gender gender,
+                    String profileImageId) {
+       this(id, name, email, password, age, gender);
+       this.profileImageId = profileImageId;
     }
 
     public Customer(String name,
@@ -143,16 +146,17 @@ public class Customer implements UserDetails {
         this.gender = gender;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
     public String getProfileImageId() {
         return profileImageId;
     }
 
     public void setProfileImageId(String profileImageId) {
         this.profileImageId = profileImageId;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

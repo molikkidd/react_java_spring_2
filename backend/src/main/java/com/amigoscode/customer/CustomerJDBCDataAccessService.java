@@ -47,7 +47,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 INSERT INTO customer(name, email, password, age, gender)
                 VALUES (?, ?, ?, ?, ?)
                 """;
-        jdbcTemplate.update(
+        int result = jdbcTemplate.update(
                 sql,
                 customer.getName(),
                 customer.getEmail(),
@@ -56,6 +56,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 customer.getGender().name()
         );
 
+        System.out.println("insertCustomer result " + result);
     }
 
     @Override
@@ -134,12 +135,13 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     }
 
     @Override
-    public void updateCustomerProfileImageId(String profileImageId, Integer customerId) {
+    public void updateCustomerProfileImageId(String profileImageId,
+                                             Integer customerId) {
         var sql = """
-           UPDATE customer
-           SET profile_image_id = ?
-           WHERE id = ?
-           """;
-        jdbcTemplate.update(sql,profileImageId,customerId);
+                UPDATE customer
+                SET profile_image_id = ?
+                WHERE id = ?
+                """;
+        jdbcTemplate.update(sql, profileImageId, customerId);
     }
 }
